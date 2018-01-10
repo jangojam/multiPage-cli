@@ -1,0 +1,14 @@
+.h-right {
+  color: yellowgreen; }
+
+.bg {
+  height: 100px;
+  width: 80px;
+  background: url(http://192.168.0.103:1110/static/img/bg.c45ad8d.jpg) no-repeat center center;
+  background-size: 80px 100px; }
+
+.bg1 {
+  height: 100px;
+  width: 80px;
+  background: url(http://192.168.0.103:1110/static/img/web.8a1b035.jpg) no-repeat center center;
+  background-size: 80px 100px; }

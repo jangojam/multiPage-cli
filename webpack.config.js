@@ -5,7 +5,7 @@ module.exports = merge(baseWebpackConfig, {
     // 本地服务器
     devServer:{
         contentBase: path.resolve(__dirname , 'dist'),
-        host: '192.168.10.56',        
+        host: '192.168.0.103',        
         compress: true,
         port: 1110
     }

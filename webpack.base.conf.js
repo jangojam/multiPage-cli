@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const glob = require('glob') // 用于获取文件路径
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 var htmlPlugin = []
 function getPathName(dirPath) {
     var split = dirPath.split('/')
@@ -41,23 +42,47 @@ module.exports = {
     output:{
         path: path.resolve(__dirname, 'dist'),
         filename: 'static/js/[name].js',
-        // publicPath: '../'
+        publicPath: 'http://192.168.0.103:1110/'
         // chunkFilename: 'static/js/[id].js'
 
     },
     module:{
         rules: [
+            // 上线
+            // {
+            //     test: /\.css$/,
+            //     use: ExtractTextPlugin.extract({
+            //         // publicPath: 'static/css/',
+            //         fallback: "style-loader",
+            //         use: "css-loader"
+            //     })
+            // },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                    // publicPath: 'static/css/',
-                    fallback: "style-loader",
-                    use: "css-loader"
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "sass-loader"
+                    }],
+                    // use style-loader in development
+                    fallback: "style-loader"
                 })
-            },
+           },
+            // 调试
             // {
             //     test: /\.css$/,
             //     use: ['style-loader', 'css-loader']
+            // },
+            // {
+            //     test: /\.scss$/,
+            //     use: [{
+            //         loader: "style-loader" // creates style nodes from JS strings
+            //     }, {
+            //         loader: "css-loader" // translates CSS into CommonJS
+            //     }, {
+            //         loader: "sass-loader" // compiles Sass to CSS
+            //     }]
             // },
             {
                 test: /\.(png|jpg|gif)/,
@@ -65,37 +90,28 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 10,
-                            name: 'static/img/[name].[hash:7].[ext]'
+                            limit: 1000,
+                            name: '[name].[hash:7].[ext]',
+                            // name: '[name].[ext]',
+                            outputPath: 'static/img/'
                         },
                     },
-                    // {
-                    //     loader: 'file-loader',
-                    //     options: {
-                    //         name: '[name].[ext]?[hash]',
-                    //         outputPath: '../static/img/'
-                    //     }
-                    // }
+                    
                 ]
+            },
+            // html里面img路径
+            {
+                test: /\.(htm|html)$/i,
+                 use:[ 'html-withimg-loader'] 
             }
         ]
     },
-    // plugins: [
-    //     new HtmlWebpackPlugin({
-    //         filename: 'html/index.html',
-    //         template: 'src/html/index.html'
-    //     }),
-    //     new HtmlWebpackPlugin({
-    //         filename: 'html/page1.html',
-    //         template: 'src/html/page1.html'
-    //     })
-    // ]
     plugins: htmlPlugin.concat([
         new ExtractTextPlugin({
             filename:  (getPath) => {
             return getPath('static/css/[name].css').replace('css/js', 'css');
             },
             allChunks: true
-        })
+        }),
     ])
 }
