@@ -1,12 +1,15 @@
+const webpack = require('webpack')
 const baseWebpackConfig = require('./webpack.base.conf')
 const merge = require('webpack-merge')
 const path = require('path')
+const ip = require("ip");
 module.exports = merge(baseWebpackConfig, {
+    devtool: 'eval-source-map',
     // 本地服务器
     devServer:{
         contentBase: path.resolve(__dirname , 'dist'),
-        host: '192.168.0.103',        
+        host: ip.address(),        
         compress: true,
-        port: 1110
+        port: 1110,
     }
 })

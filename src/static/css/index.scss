@@ -1,4 +1,4 @@
-$color: yellowgreen;
+$color: yellow;
 .h-right{
     color: $color;
 }
@@ -13,4 +13,11 @@ $color: yellowgreen;
     width: 80px;
     background: url(../img/web.jpg) no-repeat center center;
     background-size:80px 100px;
+}
+.h-right{
+    transform: translate(0,-50px)
+}
+.fdgsf{
+    box-shadow: dodgerblue;
+    color: rebeccapurple;
 }
