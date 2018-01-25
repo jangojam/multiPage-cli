@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": " cross-env NODE_ENV=pro webpack --config webpack.build.conf.js",
-    "dev": " cross-env NODE_ENV=env webpack-dev-server --config webpack.dev.conf.js",
+    "dev": " cross-env NODE_ENV=env webpack-dev-server --hot --config webpack.dev.conf.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jango",
